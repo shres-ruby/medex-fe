@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +67,17 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+=======
+# Medex
+
+# Description
+
+This project attempts to simplify the process of ordering much needed medications and health supplies by enabling users to upload their prescriptions or put items in their shopping cart. Another important task it aims to simplify is connecting patients to doctors and easing the appointment scheduling process. Doctors would have access to patient profiles which is stored in a secured manner.
+
+# Installation
+
+
+# Team member(s)
+
+Ruby Shrestha
+>>>>>>> 86a2c8dce4e45951bdfe4983f9d008ca0c05c635
