@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
 
 
-const RegistrationForm = () => {
+const RegistrationForm = (props) => {
   const [form] = Form.useForm();
 
   const onFinish = values => {
     console.log('Received values of form: ', values);
-    this.props.onAuth(values.email, values.password, values.confirm,
+    props.onAuth(values.email, values.password, values.confirm,
         values.firstname, values.lastname, values.phone, values.specialty,
         values.availability)
-    this.props.history.push('/');
+    props.history.push('/');
   };
   
   return (
