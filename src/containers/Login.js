@@ -1,45 +1,31 @@
 import React from 'react';
 
 import { Form, Input, Button } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { connect } from 'react-redux';
 
-// import { connect } from 'react-redux';
-import { NavLink} from 'react-router-dom';
+import * as actions from '../store/actions/auth';
 
 
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
-
-const Demo = () => {
-  const onFinish = values => {
+class LoginForm extends React.Component {
+  onFinish = values => {
     console.log('Success:', values);
+    this.props.onAuth(values.email, values.password)
+    this.props.history.push('/');
   };
 
-  const onFinishFailed = errorInfo => {
+  onFinishFailed = errorInfo => {
     console.log('Failed:', errorInfo);
   };
 
+  render() {
   return (
     <Form
-      {...layout}
       name="basic"
       initialValues={{
         remember: true,
       }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
+      onFinish={this.onFinish}
+      onFinishFailed={this.onFinishFailed}
     >
       <Form.Item
         label="Email"
@@ -67,13 +53,20 @@ const Demo = () => {
         <Input.Password />
       </Form.Item>
 
-      <Form.Item {...tailLayout}>
+      <Form.Item>
         <Button type="primary" htmlType="submit">
           Submit
         </Button>
       </Form.Item>
     </Form>
-  );
-};
+    );
+  }
+}
 
-export default Demo;
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuth: (email, password) => dispatch(actions.authLogin(email, password))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LoginForm);

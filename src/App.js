@@ -19,11 +19,11 @@ class App extends Component {
   render() {
   return (
     <Switch>
-    <div>
+    <React.Fragment>
       <CustomLayout {...this.props}>
         <BaseRouter />
       </CustomLayout>
-    </div>
+      </React.Fragment>
     </Switch>
     );
   }

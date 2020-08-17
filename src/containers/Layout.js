@@ -22,10 +22,10 @@ const CustomLayout = (props) => {
                 </Menu.Item>
             }
             <Menu.Item key="1">
-            <Link to="/registerp">Register as patient/user</Link>
+            <Link to="/patientsignup/">Register as patient/user</Link>
             </Menu.Item>
             <Menu.Item key="2">
-            <Link to="/registerd">Register as doctor</Link>
+            <Link to="/doctorsignup/">Register as doctor</Link>
             </Menu.Item>
             
         </Menu>
