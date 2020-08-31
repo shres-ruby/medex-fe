@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
 import {
   Button,
   Form,
@@ -8,9 +7,7 @@ import {
   Message,
   Segment
 } from "semantic-ui-react";
-// import { connect } from 'react-redux';
 import { NavLink } from "react-router-dom";
-// import { authSignup } from "../store/actions/auth";
 
 
 class RegistrationForm extends React.Component {
@@ -40,6 +37,7 @@ class RegistrationForm extends React.Component {
         console.log(data.token);
       }
     ).catch( error => console.log(error));
+    this.props.history.push('login/')
   };
 
   handleChange = e => {
