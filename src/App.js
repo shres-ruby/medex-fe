@@ -10,6 +10,9 @@ import patientSignup from "./containers/patientSignup";
 import doctorSignup from './containers/doctorSignup';
 import Upload from './containers/Upload';
 import ProfileView from "./containers/ProfileView";
+import EditProfile from "./containers/editProfile";
+import StartReset from "./containers/startReset";
+import PasswordReset from "./containers/passwordReset";
 
 
 class App extends Component {
@@ -36,6 +39,10 @@ class App extends Component {
         <Route exact path = '/upload/' component={Upload} />
         <Route exact path={'/profile/:email/'} token={this.token}
         render={props => <ProfileView {...props} token={this.token} />} />
+        <Route exact path='/edit/' token={this.token}
+        render={props => <EditProfile {...props} token={this.token} />} />
+        <Route exact path='/reset-password/' component={StartReset} />
+        <Route exact path='/api/password_reset/:id' render={props => <PasswordReset {...this.props} {...props}/>} />
         </CustomLayout>
       </Router>
     );
