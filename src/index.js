@@ -7,7 +7,6 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { BrowserRouter } from 'react-router-dom';
-
 import reducer from './store/reducers/auth';
 
 const composeEnchances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

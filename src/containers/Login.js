@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   Button,
   Form,
@@ -11,7 +10,7 @@ import {
 
 class LoginForm extends React.Component {
   state = {
-    credentials: {username: '', password: ''}
+    credentials: {username: '', password: ''},
   };
 
   login = e => {
@@ -27,7 +26,9 @@ class LoginForm extends React.Component {
         this.props.userLogin(data.token);
       }
     ).catch( error => console.log(error));
+
     console.log(this.state.credentials.username);
+
     this.props.history.push({
       pathname: `/profile/${this.state.credentials.username}`,
       state : {username: this.state.credentials.username}
@@ -39,7 +40,7 @@ class LoginForm extends React.Component {
     cred[e.target.name] = e.target.value;
     this.setState({credentials: cred});
   };
-  
+
   render() {
     
     return (
@@ -81,8 +82,6 @@ class LoginForm extends React.Component {
                   fluid
                   size="large"
                   onClick = {this.login}
-                  // loading={loading}
-                  // disabled={loading}
                 >
                   Login
                 </Button>

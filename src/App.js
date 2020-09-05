@@ -10,18 +10,18 @@ import patientSignup from "./containers/patientSignup";
 import doctorSignup from './containers/doctorSignup';
 import Upload from './containers/Upload';
 import ProfileView from "./containers/ProfileView";
-import EditProfile from "./containers/editProfile";
 import StartReset from "./containers/startReset";
 import PasswordReset from "./containers/passwordReset";
+import Logout from "./containers/Logout";
+import Appointment from "./containers/Appointment";
+import Scheduled from "./containers/Scheduled";
 
 
 class App extends Component {
   state = {
     token: '',
   }
-  // componentDidMount() {
-  //   this.props.onTryAutoSignup();
-  // }
+ 
   userLogin =(token) => {
     localStorage.setItem('token',token);   
     console.log(token);     
@@ -36,13 +36,15 @@ class App extends Component {
         userLogin={this.userLogin} />} />
         <Route exact path='/patientsignup/' component={patientSignup} />
         <Route exact path='/doctorsignup/' component={doctorSignup} />
-        <Route exact path = '/upload/' component={Upload} />
+        <Route exact path = '/upload/' token={this.token}
+        render={props => <Upload {...props} token={this.token} />} />
         <Route exact path={'/profile/:email/'} token={this.token}
         render={props => <ProfileView {...props} token={this.token} />} />
-        <Route exact path='/edit/' token={this.token}
-        render={props => <EditProfile {...props} token={this.token} />} />
         <Route exact path='/reset-password/' component={StartReset} />
         <Route exact path='/api/password_reset/:id' render={props => <PasswordReset {...this.props} {...props}/>} />
+        <Route exact path='/logout/' component={Logout} />
+        <Route exact path='/appointment/' component={Appointment} />
+        <Route exact path='/scheduled/' component={Scheduled} />
         </CustomLayout>
       </Router>
     );

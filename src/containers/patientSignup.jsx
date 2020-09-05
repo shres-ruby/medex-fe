@@ -20,7 +20,13 @@ class RegistrationForm extends React.Component {
     last_name: "",
     dob: "",
     address: "",
-    phone: ""
+    phone: "",
+    full_name: "",
+    height: "",
+    weight: "",
+    blood_pressure: "",
+    health_conditions: "",
+    doctor: ""
   }
   };
 
@@ -47,11 +53,7 @@ class RegistrationForm extends React.Component {
   };
 
   render() {
-    // const { email, password1, password2, firstname, lastname, dob, address, phone } = this.state;
-    // const { error, loading, token } = this.props;
-    // if (token) {
-    //   return <Redirect to="/" />;
-    // }
+  
     return (
       <Grid
         textAlign="center"
@@ -62,7 +64,6 @@ class RegistrationForm extends React.Component {
           <Header as="h2" color="teal" textAlign="center">
             User/Patient Registration
           </Header>
-          {/* {error && <p>{this.props.error.message}</p>} */}
 
           <React.Fragment>
             <Form size="large">
@@ -74,6 +75,7 @@ class RegistrationForm extends React.Component {
                   fluid
                   icon="user"
                   iconPosition="left"
+                  label= "Email"
                   placeholder="Email"
                 />
                 <Form.Input
@@ -83,6 +85,7 @@ class RegistrationForm extends React.Component {
                   name="password"
                   icon="lock"
                   iconPosition="left"
+                  label= "Password"
                   placeholder="Password"
                   type="password"
                 />
@@ -93,6 +96,7 @@ class RegistrationForm extends React.Component {
                   name="password2"
                   icon="lock"
                   iconPosition="left"
+                  label= "Confirm Password"
                   placeholder="Confirm password"
                   type="password"
                 />
@@ -102,6 +106,7 @@ class RegistrationForm extends React.Component {
                   name="first_name"
                   fluid
                   iconPosition="left"
+                  label= "First Name"
                   placeholder="First Name"
                 />
                 <Form.Input
@@ -110,6 +115,7 @@ class RegistrationForm extends React.Component {
                   name="last_name"
                   fluid
                   iconPosition="left"
+                  label= "Last Name"
                   placeholder="Last Name"
                 />
                 <Form.Input
@@ -118,6 +124,7 @@ class RegistrationForm extends React.Component {
                   name="dob"
                   fluid
                   iconPosition="left"
+                  label= "Date of Birth"
                   placeholder="YYYY-MM-DD"
                 />
                 <Form.Input
@@ -126,6 +133,7 @@ class RegistrationForm extends React.Component {
                   name="address"
                   fluid
                   iconPosition="left"
+                  label= "Address"
                   placeholder="Address"
                 />
                 <Form.Input
@@ -134,15 +142,68 @@ class RegistrationForm extends React.Component {
                   name="phone"
                   fluid
                   iconPosition="left"
+                  label="Phone"
                   placeholder="Phone"
+                />
+                <Form.Input
+                  onChange={this.handleChange}
+                  value={this.state.info.full_name}
+                  name="full_name"
+                  fluid
+                  iconPosition="left"
+                  label="Full Name"
+                  placeholder="Full Name"
+                />
+                <Form.Input
+                  onChange={this.handleChange}
+                  value={this.state.info.height}
+                  name="height"
+                  fluid
+                  iconPosition="left"
+                  label="Height"
+                  placeholder="Height"
+                />
+                <Form.Input
+                  onChange={this.handleChange}
+                  value={this.state.info.weight}
+                  name="weight"
+                  fluid
+                  iconPosition="left"
+                  label="Weight"
+                  placeholder="Weight"
+                />
+                <Form.Input
+                  onChange={this.handleChange}
+                  value={this.state.info.blood_pressure}
+                  name="blood_pressure"
+                  fluid
+                  iconPosition="left"
+                  label= "Blood Pressure"
+                  placeholder="High/Low/Normal/Not sure"
+                />
+                <Form.Input
+                  onChange={this.handleChange}
+                  value={this.state.info.health_conditions}
+                  name="health_conditions"
+                  fluid
+                  iconPosition="left"
+                  label="Health Conditions"
+                  placeholder="Enter None if none"
+                />
+                <Form.Input
+                  onChange={this.handleChange}
+                  value={this.state.info.doctor}
+                  name="doctor"
+                  fluid
+                  iconPosition="left"
+                  label="Doctor"
+                  placeholder="Enter None if none"
                 />
                 <Button
                   color="teal"
                   fluid
                   size="large"
                   onClick = {this.handleSubmit}
-                  // loading={loading}
-                  // disabled={loading}
                 >
                   Signup
                 </Button>
@@ -159,22 +220,3 @@ class RegistrationForm extends React.Component {
 }
 
 export default RegistrationForm;
-// const mapStateToProps = state => {
-//   return {
-//     loading: state.loading,
-//     error: state.error,
-//     token: state.token
-//   };
-// };
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     signup: (email, password1, password2, firstname, lastname, dob, address, phone) =>
-//       dispatch(authSignup(email, password1, password2, firstname, lastname, dob, address, phone))
-//   };
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(RegistrationForm);

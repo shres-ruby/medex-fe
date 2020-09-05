@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router';
 
 
 class Upload extends Component {
@@ -8,7 +9,7 @@ class Upload extends Component {
         title: '',
         image: null,
         upload_date: '',
-        user: '2'
+        user: '10'
     };
 
     handleChange = (e) => {
@@ -23,22 +24,27 @@ class Upload extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+
+        const token = localStorage.getItem('token');
+
         console.log(this.state);
         let form_data = new FormData();
-        form_data.append('image', this.state.image, this.state.image.name);
+        form_data.append('image', this.state.image);
         form_data.append('title', this.state.title);
         form_data.append('upload_date', this.state.upload_date);
         form_data.append('user', this.state.user);
         let url = 'http://127.0.0.1:8000/api/prescriptions/';
         axios.post(url, form_data, {
             headers: {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                'Authorization': `Token ${token}`
             }
         })
             .then(res => {
                 console.log(res.data);
             })
             .catch(err => console.log(err))
+        this.props.history.go(-1);
         this.setState({
                 title: '',
                 image: null,
@@ -55,7 +61,7 @@ class Upload extends Component {
                     value={this.state.title} onChange={this.handleChange} />
                 </p>
                 <p>
-                    <input type="text" placeholder='Upload Date' id='upload_date' 
+                    <input type="text" placeholder='YYYY-MM-DD' id='upload_date' 
                     value={this.state.upload_date} onChange={this.handleChange} />
                 </p>
                 <p>    
@@ -70,4 +76,5 @@ class Upload extends Component {
     }
 }
 
-export default Upload;
+const UploadWithRouter = withRouter(Upload)
+export default UploadWithRouter;

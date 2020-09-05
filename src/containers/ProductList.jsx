@@ -1,18 +1,28 @@
 import React from "react";
-// import { connect } from "react-redux";
 import axios from "axios";
 import { Container, Dimmer, Image, Item, Label, Loader, Message, 
 Segment, Button, Icon } from "semantic-ui-react";
 import { productListURL } from "../constants";
+import ReactPaginate from 'react-paginate';
+import '../App.css'
+
 
 class ProductList extends React.Component {
-    state = {
+  constructor(props){
+    super();
+    this.state = {
       loading: false,
       error: null,
-      data: []
+      offset: 0,
+      data: {results:[]},
+      perPage: 5,
+      currentPage: 0
     };
+    this.handlePageClick = this.handlePageClick.bind(this);
+  }
   
-    componentDidMount() {
+
+      receivedData () {
       this.setState({ loading: true });
       axios
         .get(productListURL)
@@ -23,19 +33,30 @@ class ProductList extends React.Component {
           this.setState({ error: err, loading: false });
         });
     }
-  
-    // handleAddToCart = slug => {
-    //   this.setState({ loading: true });
-    //   authAxios
-    //     .post(addToCartURL, { slug })
-    //     .then(res => {
-    //       this.props.refreshCart();
-    //       this.setState({ loading: false });
-    //     })
-    //     .catch(err => {
-    //       this.setState({ error: err, loading: false });
-    //     });
-    // };
+    
+    handlePageClick = (e) => {
+      const selectedPage = e.selected;
+      const offset = selectedPage * this.state.perPage;
+
+      this.setState({
+        currentPage: selectedPage,
+        offset: offset
+      }, () => {
+        console.log(this.state.currentPage, this.state.offset);
+        axios
+        .get(`http://127.0.0.1:8000/products/allproducts/?offset=${this.state.offset}`)
+        .then(res => {
+          this.setState({ data: res.data, loading: false });
+        })
+        .catch(err => {
+          this.setState({ error: err, loading: false });
+        });
+      });
+    };
+
+    componentDidMount(){
+      this.receivedData()
+    }
   
     render() {
       const { data, error, loading } = this.state;
@@ -57,8 +78,22 @@ class ProductList extends React.Component {
               <Image src="/images/wireframe/short-paragraph.png" />
             </Segment>
           )}
+
+          <ReactPaginate
+            previousLabel={"prev"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={3}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}/>
+
           <Item.Group divided>
-            {data.map(item => {
+            {data.results.map(item => {
               return (
                 <Item key={item.id}>
                   <Item.Image src={item.image} />
@@ -81,7 +116,6 @@ class ProductList extends React.Component {
                         floated="right"
                         icon
                         labelPosition="right"
-                        // onClick={() => this.handleAddToCart(item.slug)}
                       >
                         Add to cart
                         <Icon name="cart plus" />
@@ -110,14 +144,4 @@ class ProductList extends React.Component {
     }
   }
   
-//   const mapDispatchToProps = dispatch => {
-//     return {
-//       refreshCart: () => dispatch(fetchCart())
-//     };
-//   };
-  
-//   export default connect(
-//     null,
-//     mapDispatchToProps
-//   )(ProductList);
-export default ProductList;
+  export default ProductList;
