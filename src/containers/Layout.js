@@ -26,6 +26,9 @@ class CustomLayout extends React.Component {
               <Link to="/doctorsignup">
                 <Menu.Item header>Register as doctor</Menu.Item>
               </Link>
+              <Link to="/doctor-profiles/">
+                <Menu.Item header>Our doctors</Menu.Item>
+              </Link>
             </Container>
           </Menu>
   
