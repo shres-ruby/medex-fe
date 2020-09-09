@@ -20,7 +20,6 @@ class ProductList extends React.Component {
     };
     this.handlePageClick = this.handlePageClick.bind(this);
   }
-  
 
       receivedData () {
       this.setState({ loading: true });
@@ -28,6 +27,7 @@ class ProductList extends React.Component {
         .get(productListURL)
         .then(res => {
           this.setState({ data: res.data, loading: false });
+          console.log(res.data);
         })
         .catch(err => {
           this.setState({ error: err, loading: false });
@@ -93,17 +93,12 @@ class ProductList extends React.Component {
             activeClassName={"active"}/>
 
           <Item.Group divided>
-            {data.results.map(item => {
+            {data.results.map((item, index) => {
               return (
-                <Item key={item.id}>
+                <Item key={index}>
                   <Item.Image src={item.image} />
                   <Item.Content>
-                    <Item.Header
-                      as="a"
-                      onClick={() =>
-                        this.props.history.push(`/products/${item.id}`)
-                      }
-                    >
+                    <Item.Header>
                       {item.title}
                     </Item.Header>
                     <Item.Meta>
