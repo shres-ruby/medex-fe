@@ -6,16 +6,8 @@ import { Link } from "react-router-dom";
 class ProfileView extends React.Component {
     state = {
       profile : [],
+      patient: true,
       username: this.props.location.state.username,
-      info: {
-        user: this.props.location.state.username,
-        full_name: "",
-        height: "",
-        weight: "",
-        blood_pressure: "",
-        health_conditions: "",
-        doctor: ""
-      }
     };
 
     viewprofile = (username) => {
@@ -41,15 +33,17 @@ class ProfileView extends React.Component {
         });
     }
 
-
     componentDidMount(){
       this.viewprofile(this.state.username);
     }
     
     render() {
+    
       return (
           <div>
             <h1>Profile Page</h1>
+            
+              <React.Fragment>
             <Link to="/upload/">
             <button>Upload Prescription</button>
             </Link>
@@ -68,7 +62,7 @@ class ProfileView extends React.Component {
             <p>Blood Pressure : { this.state.profile.blood_pressure }</p>
             <p>Health Conditions : { this.state.profile.health_conditions }</p>
             <p>Doctor : { this.state.profile.doctor }</p>
-
+            </React.Fragment>
          </div>
       );
     }
