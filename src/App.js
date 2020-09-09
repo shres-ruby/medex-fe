@@ -15,6 +15,8 @@ import PasswordReset from "./containers/passwordReset";
 import Logout from "./containers/Logout";
 import Appointment from "./containers/Appointment";
 import Scheduled from "./containers/Scheduled";
+import ProfileList from "./containers/profileList";
+import DoctorList from "./containers/doctorList";
 
 
 class App extends Component {
@@ -38,6 +40,9 @@ class App extends Component {
         <Route exact path='/doctorsignup/' component={doctorSignup} />
         <Route exact path = '/upload/' token={this.token}
         render={props => <Upload {...props} token={this.token} />} />
+        <Route exact path='/patient-profiles/' token={this.token}
+        render={props => <ProfileList {...props} token={this.token} />} />
+        <Route exact path='/doctor-profiles/' component={DoctorList} />
         <Route exact path={'/profile/:email/'} token={this.token}
         render={props => <ProfileView {...props} token={this.token} />} />
         <Route exact path='/reset-password/' component={StartReset} />
